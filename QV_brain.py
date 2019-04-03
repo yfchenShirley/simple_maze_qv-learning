@@ -13,6 +13,7 @@ class QVLearningTable:
     def __init__(self, actions, learning_rate=0.01, reward_decay=0.9, e_greedy=0.9):
         self.actions = actions  # a list
         self.lr = learning_rate
+        self.lr_v = 0.01
         self.gamma = reward_decay
         self.epsilon = e_greedy
         self.q_table = pd.DataFrame(columns=self.actions, dtype=np.float64)#pd.read_pickle('./models/model.pkl')#
@@ -41,7 +42,7 @@ class QVLearningTable:
             
         self.q_table.loc[s, a] += self.lr * (q_target - q_predict)  # update
         #update V function
-        self.v_table.loc[s,0] = self.v_table.loc[s,0] + self.lr * (r + self.gamma*self.v_table.loc[s_,0] - self.v_table.loc[s,0])
+        self.v_table.loc[s,0] = self.v_table.loc[s,0] + self.lr_v * (r + self.gamma*self.v_table.loc[s_,0] - self.v_table.loc[s,0])
         if s_ == 'terminal':
             self.q_table.to_pickle('./models/model_qv-Q.pkl')
             self.q_table.to_pickle('./models/model_qv-V.pkl')
