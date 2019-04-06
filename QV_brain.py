@@ -10,10 +10,10 @@ import pandas as pd
 
 
 class QVLearningTable:
-    def __init__(self, actions, learning_rate=0.1, reward_decay=0.9, e_greedy=0.9):
+    def __init__(self, actions, learning_rate=0.1, lr_v=0.01, reward_decay=0.9, e_greedy=0.9):
         self.actions = actions  # a list
         self.lr = learning_rate
-        self.lr_v = 0.01
+        self.lr_v = lr_v
         self.gamma = reward_decay
         self.epsilon = e_greedy
         self.q_table = pd.DataFrame(columns=self.actions, dtype=np.float64)#pd.read_pickle('./models/model.pkl')#
