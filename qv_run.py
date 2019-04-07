@@ -53,7 +53,7 @@ def update():
             if done:
                 plot_y.append(reward_total)
                 print(f"Episode {episode}:")
-                print(f"Total rewards(lrQ={lr_q},lrV={lr_v}): {reward_total}")
+                print(f"Total rewards(lrQ={lr_q},lrV={lr_v_test}): {reward_total}")
                 break
 
     # end of game
@@ -70,13 +70,13 @@ if __name__ == "__main__":
     ax.grid()
 
     for lr_q in [0.3, 0.5]:#
-        for lr_v in [0.01, 0.03, 0.05]:
+        for lr_v_test in [0.01, 0.03, 0.05]:
             env = Maze()
-            RL = QVLearningTable(actions=list(range(env.n_actions)), learning_rate=lr_q, lr_v=lr_v)
+            RL = QVLearningTable(actions=list(range(env.n_actions)), learning_rate=lr_q, lr_v=lr_v_test)
 
             env.after(100, update)
             env.mainloop()
-            ax.plot(range(EPIS), plot_y, label='lrq='+str(lr_q)+', lrv='+str(lr_v))
+            ax.plot(range(EPIS), plot_y, label='lrq='+str(lr_q)+', lrv='+str(lr_v_test))
 
     legend = ax.legend(loc='lower right', shadow=True, fontsize='x-large')    
     fig.savefig("QV_lr_1.png")
