@@ -69,7 +69,7 @@ if __name__ == "__main__":
            title='Total rewards at each episode')
     ax.grid()
 
-    for lr_test in [0.8, 0.85, 0.9, 0.95]:#
+    for lr_test in [0.09, 0.1, 0.3, 0.5]:#
         env = Maze()
         RL = QVLearningTable(actions=list(range(env.n_actions)), learning_rate=lr_test)
 
